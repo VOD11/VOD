@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VØD</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#0e0f11;--card:#1b1c20;--in:#25262b;--tx:#eceef0;--mu:#8b8f97;--ac:#f0922f;--ok:#5bc862;--bad:#ee5126;--bd:#2b2d33;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:600 16px/1.35 Rajdhani,"Segoe UI",system-ui,sans-serif}
+#app{max-width:640px;margin:0 auto;min-height:100vh}
+.hero{padding:44px 20px 26px;text-align:center;background:radial-gradient(700px 260px at 50% 0,#3a2a1a 0,transparent 70%),repeating-linear-gradient(115deg,#17120e 0 9px,#1c1611 9px 18px,#120f0c 18px 30px)}
+.logo{width:68px;height:68px;margin:0 auto 14px;border:1.5px solid var(--ac);border-radius:12px;background:#2f1c08;display:grid;place-items:center}
+.big{font-size:46px;letter-spacing:12px;font-weight:700;margin:0}.sub{color:var(--ac);letter-spacing:5px;font-size:12px;text-transform:uppercase}
+.pan{margin:0 16px;padding:22px;background:var(--card);border:1px solid var(--bd);border-radius:12px}
+h2{margin:0 0 16px;font-size:20px;letter-spacing:4px;text-transform:uppercase}
+label{display:block;color:var(--mu);font-size:12px;letter-spacing:3px;text-transform:uppercase;margin:12px 0 6px}
+input{width:100%;padding:15px;background:var(--in);border:1px solid transparent;border-radius:8px;color:var(--tx);font:inherit;font-size:18px}
+input:focus{outline:0;border-color:var(--ac)}
+.btn{display:block;width:100%;padding:15px;margin-top:14px;border:0;border-radius:8px;background:var(--ac);color:#1a1006;font:inherit;font-size:17px;letter-spacing:3px;text-transform:uppercase;font-weight:700}
+.btn.ok{background:var(--ok)}.btn.no{background:var(--bad);color:#fff}
+.lnk{display:block;text-align:center;color:var(--ac);margin:16px 0 8px;background:0;border:0;font:inherit;width:100%}
+.lang{display:inline-flex;background:var(--in);border-radius:8px;padding:3px}.lang b{padding:7px 12px;border-radius:6px;color:var(--mu);letter-spacing:2px;font-size:14px}.lang b{cursor:pointer}.lang b.on{background:var(--ac);color:#1a1006}
+.foot{text-align:center;color:var(--mu);font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:22px 16px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:18px 16px;border-bottom:1px solid var(--bd)}
+.top h1{margin:0;font-size:24px;letter-spacing:5px;text-transform:uppercase}.top i{color:var(--ac);font-style:normal;letter-spacing:4px;font-size:11px}
+.tabs{display:flex;margin:16px;padding:4px;background:var(--card);border:1px solid var(--bd);border-radius:8px}
+.tabs button{flex:1;padding:12px 4px;border:0;border-radius:6px;background:0;color:var(--mu);font:inherit;letter-spacing:3px;text-transform:uppercase;font-size:13px}
+.tabs button.on{background:var(--ac);color:#1a1006;font-weight:700}
+.list{padding:0 16px 120px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:14px;margin-bottom:12px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.nm{font-size:19px;letter-spacing:3px;text-transform:uppercase}.mu{color:var(--mu);font-size:14px;letter-spacing:1px}
+.tag{border:1px solid var(--ok);color:var(--ok);border-radius:5px;padding:4px 10px;font-size:11px;letter-spacing:3px}.tag.p{border-color:#e6c229;color:#e6c229}.tag.b{border-color:var(--bad);color:var(--bad)}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.acts button,.ic{background:var(--in);border:0;border-radius:8px;color:var(--ac);padding:12px 14px;font:inherit;font-size:15px}.acts button.r,.ic.r{color:var(--bad)}
+.item{display:flex;align-items:center;gap:12px}.th{width:44px;height:44px;border-radius:6px;background:var(--in);border:1px solid var(--bd);display:grid;place-items:center;font-size:22px;flex:none}
+.dock{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:linear-gradient(transparent,var(--bg) 35%)}
+.dock .btn{margin:0;max-width:608px;margin-inline:auto}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;z-index:9}
+.sheet>div{width:100%;max-width:640px;margin:0 auto;background:var(--card);border-top:1px solid var(--bd);border-radius:14px 14px 0 0;padding:18px 18px calc(22px + env(safe-area-inset-bottom,0px));max-height:85vh;overflow:auto}
+.two{display:flex;gap:10px}.two .btn{margin-top:12px}
+.msg{min-height:22px;margin-top:10px;font-weight:700}.err{color:var(--bad)}.good{color:var(--ok)}
+.org{color:var(--ac)}.sec{color:var(--ac);letter-spacing:4px;font-size:13px;margin:16px 0 6px}
+.sp{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--bd)}.sp b{color:var(--ac)}
+code{font-size:20px;letter-spacing:4px;color:var(--ac)}
+.sub2{color:var(--mu);letter-spacing:5px;font-size:12px;text-transform:uppercase}.act{color:var(--ok);background:var(--in);padding:8px 12px;border-radius:6px;letter-spacing:3px;font-size:12px;text-transform:uppercase}
+.wal{background:#2f1c08;color:var(--ac);padding:10px 14px;border-radius:8px;font-size:18px;font-weight:700}
+.big2{padding:20px}.lab{letter-spacing:4px;font-size:13px;text-transform:uppercase}.amt{font-size:46px;font-weight:700;margin:8px 0 16px}
+.tri{display:flex;border-top:1px solid var(--bd);padding-top:16px}.tri div{flex:1;text-align:center;color:var(--mu);letter-spacing:3px;font-size:12px;text-transform:uppercase}.tri b{display:block;color:var(--tx);font-size:26px;letter-spacing:0}
+.sech{display:flex;align-items:center;gap:10px;letter-spacing:4px;text-transform:uppercase;font-size:14px;margin:22px 0 12px}.sech:after{content:"";flex:1;height:1px;background:var(--bd)}
+.empty{border:1px dashed var(--bd);border-radius:10px;padding:24px;text-align:center;color:var(--mu);background:var(--card);margin-bottom:12px}
+.unit{display:flex;gap:12px}.th2{width:64px;height:64px;border-radius:8px;background:var(--in);border:1px solid var(--bd);display:grid;place-items:center;font-size:30px;flex:none}.gr{flex:1;min-width:0}.nm2{font-size:18px}.chips{display:flex;gap:8px;margin-top:8px}.chip{background:var(--in);border-radius:6px;padding:5px 10px;font-size:14px}
+.rt{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:8px}.pc{background:#2f1c08;color:var(--ac);padding:6px 10px;border-radius:6px;font-weight:700;display:inline-block;margin:6px 0}
+.rb{background:var(--ac);color:#1a1006;border:0;border-radius:6px;padding:12px 16px;font:inherit;letter-spacing:3px;text-transform:uppercase;font-weight:700}.rb.full{width:100%;margin-top:8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.wc{margin:0}.img{height:110px;border-radius:8px;background:linear-gradient(135deg,#2a2c33,#15161a);display:grid;place-items:center;font-size:44px;position:relative;margin-bottom:10px}.tg{position:absolute;top:8px;left:8px;border:1px solid var(--ac);color:var(--ac);background:rgba(0,0,0,.5);border-radius:5px;padding:4px 8px;font-size:11px;letter-spacing:3px;text-transform:uppercase}
+.nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--bd);padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}.nav button{flex:1;padding:12px 4px;background:0;border:0;color:var(--mu);font:inherit;letter-spacing:2px;font-size:13px;display:flex;align-items:center;justify-content:center;gap:8px}.nav button.on{color:var(--ac)}.nav span{font-size:22px;filter:grayscale(1)}.nav .on span{filter:none}
+.av{width:92px;height:92px;margin:18px auto 14px;border:1.5px solid var(--ac);border-radius:14px;background:#2f1c08;display:grid;place-items:center;font-size:44px}.pn{margin:0;font-size:34px;letter-spacing:6px;text-transform:uppercase}.rank{display:inline-block;margin:12px 0 20px;background:#2f1c08;color:var(--ac);border-radius:8px;padding:10px 16px;letter-spacing:4px;text-transform:uppercase}
+.st{display:flex;gap:12px}.st .card{flex:1}.st b{display:block;font-size:26px}.st span{color:var(--mu);font-size:12px;letter-spacing:4px;text-transform:uppercase}
+.lo{background:transparent;color:var(--tx);border:1px solid var(--bd)}
+html{-webkit-text-size-adjust:100%}
+#app{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+.pan{margin:0 auto;width:calc(100% - 32px);max-width:520px}
+button{cursor:pointer;min-height:44px}button:hover{filter:brightness(1.12)}.lang b{min-height:0}
+.card{overflow-wrap:anywhere}
+@media (min-width:860px){
+#app{max-width:1120px}
+.hero{padding:70px 20px 34px}.big{font-size:56px}
+.top{padding:22px 24px}.tabs{margin:20px 24px}.list{padding:0 24px 120px}
+.list:not([style]){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.list:not([style])>.card{margin:0}
+.list:not([style])>.msg,.list:not([style])>.sech,.list:not([style])>.empty,.list:not([style])>.big2,.list:not([style])>.grid{grid-column:1/-1}
+.grid{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.list[style]{max-width:640px;margin:0 auto}
+.nav,.dock{max-width:1120px;margin:0 auto}
+.sheet{align-items:center}.sheet>div{border-radius:14px;max-width:520px;border:1px solid var(--bd)}
+}
+@media (max-width:480px){
+.big{font-size:38px;letter-spacing:8px}.top h1{font-size:20px;letter-spacing:3px}.top{flex-wrap:wrap}
+.tabs button{letter-spacing:1px;font-size:12px;padding:12px 2px}
+.acts button{flex:1 1 42%}.amt{font-size:38px}.nm{font-size:17px;letter-spacing:2px}
+.th2{width:52px;height:52px;font-size:24px}.rb{padding:12px 10px;letter-spacing:2px;font-size:13px}.pn{font-size:28px;letter-spacing:4px}
+.nav button{flex-direction:column;gap:2px;font-size:11px;letter-spacing:1px;padding:8px 2px}
+.tri b,.st b{font-size:20px}
+}
+</style></head><body><div id="app"></div>
+<script>
+var L={de:{sub:"Militärisches Kommandonetz",sec:"Sicherer Zugang",rec:"Rekrutierung",cs:"Rufzeichen",pw:"Kennwort",login:"Anmelden",req:"Freigabe anfordern",al:"Bereits rekrutiert? Anmelden",na:"Keine Freigabe? Rekrutierung anfordern",ft:"Nur autorisiertes Personal · Freigabe erforderlich",
+cmd:"Kommandozentrale",own:"Besitzer-Freigabe",pl:"Spieler",so:"Soldaten",we:"Waffen",co:"Codes",pen:"Ausstehend",app:"Genehmigt",blk:"Gesperrt",ap:"Genehmigen",rj:"Ablehnen",mo:"Geld",ar:"Armee",lk:"Sperren",ul:"Entsperren",rm:"Entfernen",adj:"Anpassen",bal:"Aktuelles Guthaben",amt:"Betrag",giv:"Geben",tak:"Abziehen",fo:"Streitkräfte",gu:"Guthaben",stf:"STF",
+as:"Soldatenklasse hinzufügen",aw:"Waffe hinzufügen",nm:"Name",pr:"Preis",atk:"ATK",def:"DEF",upg:"Upgrade-Preis",max:"Max",sv:"Speichern",cr:"Kredite",buy:"Kaufen",up:"Aufrüsten",out:"Abmelden",
+wait:"Anfrage gesendet. Warte auf Freigabe durch den Besitzer.",pend:"Dein Konto wartet auf Freigabe",bl:"Dieses Konto ist gesperrt",wr:"Falsche Zugangsdaten",tk:"Rufzeichen bereits vergeben",nomo:"Nicht genug Guthaben",mx:"Maximale Stufe erreicht",
+rd:"Code einlösen",rk:"Rang",su:"Kommandant einrichten",sup:"Lege das Kennwort für das Konto commander fest. Wer diese Seite zuerst öffnet, legt es fest.",ld:"Verbinde …",off:"Keine Verbindung zur Datenbank. Diese Webseite blockiert Firebase. Öffne die Seite über GitHub Pages.",shortp:"Mindestens 8 Zeichen",mxu:"Max. Spieler (Einlösungen)",rdm:"eingelöst",al2:"Du hast diesen Code bereits eingelöst",rk0:"Rekrut",rkp:"Rang (frei eingeben)",hq:"Einsatzkraft",act:"Aktiv",war:"Kriegskasse",tr:"Truppen",fk:"Feuerkraft",wf:"Waffen",asf:"Aktive Streitkräfte",aws:"Arsenal-Status",ne:"Keine Einheiten stationiert. Besuche die Kaserne, um Soldaten zu rekrutieren.",nw2:"Keine Waffen beschafft. Besuche das Arsenal, um dich zu bewaffnen.",kas:"Kaserne",kasu:"Einheiten rekrutieren & ausbilden",rek:"Rekrutieren",ars:"Arsenal",arsu:"Beschaffen & Aufrüsten",bes:"Beschaffen",gs:"Gesperrt",prof:"Profil",fr:"Freigabe",spr:"Sprache",ab:"Abmelden",en:"8-stelliger Code",go:"Einlösen",ok:"Gutgeschrieben: ",bad:"Ungültiger oder bereits benutzter Code",gen:"Code erzeugen",us:"Benutzt von ",un:"Unbenutzt",de:"Löschen",no:"Noch nichts",cn:"Gesperrte Spieler können keine Codes einlösen",note:"Solo-Version: Daten liegen nur auf diesem Gerät.",ns:"Soldaten",nw:"Waffen"},
+en:{sub:"Military Command Net",sec:"Secure Access",rec:"Recruitment",cs:"Callsign",pw:"Password",login:"Log in",req:"Request clearance",al:"Already recruited? Log in",na:"No clearance? Request recruitment",ft:"Authorized personnel only · Clearance required",
+cmd:"Command Center",own:"Owner clearance",pl:"Players",so:"Soldiers",we:"Weapons",co:"Codes",pen:"Pending",app:"Approved",blk:"Blocked",ap:"Approve",rj:"Reject",mo:"Money",ar:"Army",lk:"Block",ul:"Unblock",rm:"Remove",adj:"Adjust",bal:"Current balance",amt:"Amount",giv:"Give",tak:"Subtract",fo:"Forces",gu:"Balance",stf:"LVL",
+as:"Add soldier class",aw:"Add weapon",nm:"Name",pr:"Price",atk:"ATK",def:"DEF",upg:"Upgrade price",max:"Max",sv:"Save",cr:"Credits",buy:"Buy",up:"Upgrade",out:"Log out",
+wait:"Request sent. Waiting for owner approval.",pend:"Your account is awaiting approval",bl:"This account is blocked",wr:"Wrong credentials",tk:"Callsign already taken",nomo:"Not enough balance",mx:"Max level reached",
+rd:"Redeem code",rk:"Rank",su:"Set up commander",sup:"Choose the password for the commander account. Whoever opens this page first sets it.",ld:"Connecting …",off:"No connection to the database. This website blocks Firebase. Open the page through GitHub Pages.",shortp:"At least 8 characters",mxu:"Max players (redemptions)",rdm:"redeemed",al2:"You already redeemed this code",rk0:"Recruit",rkp:"Rank (type anything)",hq:"Task force",act:"Active",war:"War chest",tr:"Troops",fk:"Firepower",wf:"Weapons",asf:"Active forces",aws:"Arsenal status",ne:"No units stationed. Visit the barracks to recruit soldiers.",nw2:"No weapons acquired. Visit the armory to arm yourself.",kas:"Barracks",kasu:"Recruit & train units",rek:"Recruit",ars:"Armory",arsu:"Acquire & upgrade",bes:"Acquire",gs:"Locked",prof:"Profile",fr:"Clearance",spr:"Language",ab:"Log out",en:"8-digit code",go:"Redeem",ok:"Credited: ",bad:"Invalid or already used code",gen:"Generate code",us:"Used by ",un:"Unused",de:"Delete",no:"Nothing yet",cn:"Blocked players cannot redeem codes",note:"Solo version: data stays on this device.",ns:"Soldiers",nw:"Weapons"}};
+window.SEED={soldiers:[[1,"Sniper",750,55,10,"Long range precision elimination."],[2,"Builder",1500,0,10,"kann die alles für ein kleinen Preis bauen"],[3,"Combat Medic",10000,8,25,"Keeps the squad alive under fire."],[4,"Infantry Rifleman",100000,20,15,""],[5,"Soldaten upgrade (x50)",500,10,15,"Soldaten upgrade (3 lvl)"],[6,"Anonyme Soldaten (x150)",2500,10,10,"Niemand weiss , dass die dir gehören (x150)"]].map(function(a){return{id:a[0],n:a[1],p:a[2],a:a[3],d:a[4],ds:a[5]}}),weapons:[[11,"Glock 17",175,1,5000000,500],[12,"M4A1 Carbine",500,350,500000,30],[13,"Combat Shotgun",700,450,500000,45],[14,"Grenade Launcher",1200,800,500000,70],[15,"Minigun",10000,10,500000,120],[16,"Nuke",100000000000,0,5,9999]].map(function(a){return{id:a[0],n:a[1],p:a[2],u:a[3],m:a[4],r:a[5]}})};
+var S={lang:"de",me:null,users:{},soldiers:[],weapons:[],codes:[],ready:false,err:""};
+try{var L0=JSON.parse(localStorage.getItem("vod3"));if(L0){S.lang=L0.lang||"de";S.me=L0.me||null}}catch(e){}
+var mode="in",tab="pl",ptab="so",msg="",bad=0,sh=null;
+function t(k){return L[S.lang][k]}function save(){try{localStorage.setItem("vod3",JSON.stringify({lang:S.lang,me:S.me}))}catch(e){}if(window.DB)DB.push()}
+async function hp(n,p){var b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode("vod|"+n+"|"+p));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0")}).join("")}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function f(n){return "$"+Number(n).toLocaleString(S.lang=="de"?"de-DE":"en-US")}
+function $(i){return document.getElementById(i)}
+function say(m,b){msg=m;bad=b;draw()}
+function setLang(l){S.lang=l;save();draw()}
+function go(m){mode=m;msg="";draw()}
+async function sub(){var n=$("n").value.trim().toLowerCase().replace(/[^a-z0-9_äöüß\-]/g,"").slice(0,20),p=$("p").value;if(!n||!p)return;var u=S.users[n],h=await hp(n,p);
+if(mode=="reg"){if(u||n=="commander")return say(t("tk"),1);S.users[n]={ph:h,st:"pending",blocked:false,money:5000,sol:{},wep:{}};save();mode="in";return say(t("wait"),0)}
+if(!u||u.ph!==h)return say(t("wr"),1);if(u.st!="ok")return say(t("pend"),1);if(u.blocked)return say(t("bl"),1);S.me=n;msg="";save();draw()}
+function doLogout(){S.me=null;msg="";mode="in";save();draw()}
+function setTab(x){tab=x;draw()}function setP(x){ptab=x;msg="";draw()}
+function closeSheet(){sh=null;draw()}
+function dec(n,ok){if(ok){S.users[n].st="ok"}else{delete S.users[n]}save();draw()}
+function blk(n){S.users[n].blocked=!S.users[n].blocked;save();draw()}
+function rem(n){delete S.users[n];save();draw()}
+function money(n){sh={h:t("adj")+" · "+esc(n),b:'<div class="mu">'+t("bal")+": "+f(S.users[n].money)+'</div><label>'+t("amt")+'</label><input id="a" type="number" inputmode="numeric"><div class="two"><button class="btn ok" onclick="adj(\''+n+'\',1)">+ '+t("giv")+'</button><button class="btn no" onclick="adj(\''+n+'\',-1)">− '+t("tak")+'</button></div>'};draw()}
+function adj(n,s){var a=Math.abs(parseFloat($("a").value));if(!a)return;S.users[n].money=Math.max(0,S.users[n].money+s*a);save();money(n)}
+function army(n){var u=S.users[n],b='<div class="mu">'+t("gu")+": "+f(u.money)+'</div><div class="sec">'+t("ns").toUpperCase()+'</div>';
+S.soldiers.forEach(function(s){if(u.sol[s.id])b+='<div class="sp"><span>'+esc(s.n)+'</span><b>×'+u.sol[s.id]+'</b></div>'});b+='<div class="sec">'+t("nw").toUpperCase()+'</div>';
+S.weapons.forEach(function(w){if(u.wep[w.id])b+='<div class="sp"><span>'+esc(w.n)+'</span><b>'+t("stf")+" "+u.wep[w.id]+'</b></div>'});sh={h:esc(n)+" · "+t("fo"),b:b};draw()}
+function editS(id){var s=S.soldiers.find(function(x){return x.id==id})||{n:"",p:"",a:"",d:""};sh={h:id?esc(s.n):t("as"),b:'<label>'+t("nm")+'</label><input id="e1" value="'+esc(s.n)+'"><label>'+t("pr")+'</label><input id="e2" type="number" value="'+s.p+'"><label>'+t("atk")+'</label><input id="e3" type="number" value="'+s.a+'"><label>'+t("def")+'</label><input id="e4" type="number" value="'+s.d+'"><button class="btn" onclick="saveS('+(id||0)+')">'+t("sv")+'</button>'};draw()}
+function saveS(id){var o={n:$("e1").value.trim()||"?",p:+$("e2").value||0,a:+$("e3").value||0,d:+$("e4").value||0};if(id){Object.assign(S.soldiers.find(function(x){return x.id==id}),o)}else{o.id=Date.now();S.soldiers.push(o)}save();closeSheet()}
+function delS(id){S.soldiers=S.soldiers.filter(function(x){return x.id!=id});save();draw()}
+function editW(id){var w=S.weapons.find(function(x){return x.id==id})||{n:"",p:"",u:"",m:""};sh={h:id?esc(w.n):t("aw"),b:'<label>'+t("nm")+'</label><input id="e1" value="'+esc(w.n)+'"><label>'+t("pr")+'</label><input id="e2" type="number" value="'+w.p+'"><label>'+t("upg")+'</label><input id="e3" type="number" value="'+w.u+'"><label>'+t("max")+'</label><input id="e4" type="number" value="'+w.m+'"><button class="btn" onclick="saveW('+(id||0)+')">'+t("sv")+'</button>'};draw()}
+function saveW(id){var o={n:$("e1").value.trim()||"?",p:+$("e2").value||0,u:+$("e3").value||0,m:+$("e4").value||1};if(id){Object.assign(S.weapons.find(function(x){return x.id==id}),o)}else{o.id=Date.now();S.weapons.push(o)}save();closeSheet()}
+function delW(id){S.weapons=S.weapons.filter(function(x){return x.id!=id});save();draw()}
+function gen(){var a=parseFloat($("ga").value),m=Math.max(1,Math.floor(parseFloat($("gm").value)||1));if(!(a>0))return;var c;do{c=String(Math.floor(Math.random()*1e8)).padStart(8,"0")}while(S.codes.some(function(x){return x.c===c}));S.codes.unshift({c:c,a:a,by:[],m:m,t:Date.now()});save();draw()}
+function delc(c){S.codes=S.codes.filter(function(x){return x.c!==c||x.by.length});save();draw()}
+function buyS(id){var u=S.users[S.me],s=S.soldiers.find(function(x){return x.id==id});if(u.money<s.p)return say(t("nomo"),1);u.money-=s.p;u.sol[id]=(u.sol[id]||0)+1;save();say("",0)}
+function buyW(id){var u=S.users[S.me],w=S.weapons.find(function(x){return x.id==id}),l=u.wep[id]||0,c=l?w.u:w.p;if(l>=w.m)return say(t("mx"),1);if(u.money<c)return say(t("nomo"),1);u.money-=c;u.wep[id]=l+1;save();say("",0)}
+async function redeem(){var v=$("rc").value.replace(/\D/g,"");if(S.users[S.me].blocked)return say(t("bl"),1);var r=await DB.redeem(v,S.me);if(r.r=="ok")return say(t("ok")+f(r.a),0);say(t(r.r=="again"?"al2":r.r=="blocked"?"bl":"bad"),1)}
+function lg(){return '<div class="lang"><b class="'+(S.lang=="en"?"on":"")+'" onclick="setLang(\'en\')">EN</b><b class="'+(S.lang=="de"?"on":"")+'" onclick="setLang(\'de\')">DE</b></div>'}
+var SH='<svg width="34" height="34" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z" fill="none" stroke="#f0922f" stroke-width="1.8"/><path d="M12 2v20c4.6-1.6 8-6 8-11V5z" fill="#f0922f"/></svg>';
+function tabs(a,cur,fn){return '<div class="tabs">'+a.map(function(x){return '<button class="'+(x[0]==cur?"on":"")+'" onclick="'+fn+'(\''+x[0]+'\')">'+x[1]+'</button>'}).join("")+'</div>'}
+function cinfo(c){return c.by.length+"/"+c.m+" "+t("rdm")+(c.by.length?" · "+c.by.map(esc).join(", "):"")}
+function stat(u){var n=0,f2=0,w=0;S.soldiers.forEach(function(s){var c=u.sol[s.id]||0;n+=c;f2+=c*s.a});S.weapons.forEach(function(x){var l=u.wep[x.id]||0;if(l){w++;f2+=(x.r||0)*l}});return{n:n,f:f2,w:w}}
+function askRank(n){sh={h:t("rk")+" · "+esc(n),b:'<label>'+t("rkp")+'</label><input id="rk" maxlength="30" value="'+esc(S.users[n].rank||"")+'"><button class="btn" onclick="setRank(\''+n+'\')">'+t("sv")+'</button>'};draw()}
+function setRank(n){S.users[n].rank=$("rk").value.trim().slice(0,30);save();closeSheet()}
+function nv(i,e,l){return `<button class="${ptab==i?"on":""}" onclick="setP('${i}')"><span>${e}</span>${l}</button>`}
+function hd(a,b,c){return `<div class="top"><div><h1>${a}</h1><div class="sub2">${b}</div></div>${c}</div>`}
+function player(){var u=S.users[S.me],s=stat(u),h="",a=0,m=`<div class="msg ${bad?"err":"good"}">${esc(msg)}</div>`,wal=`<div class="wal">${f(u.money)}</div>`;
+if(["hq","ba","ar","pr"].indexOf(ptab)<0)ptab="hq";
+if(ptab=="hq"){h=`<div class="top"><div><div class="sub2">${t("hq")}</div><h1>${esc(S.me)}</h1></div><span class="act">● ${t("act")}</span></div><div class="list">${m}<div class="card big2"><div class="org lab">▣ ${t("war")}</div><div class="amt">${f(u.money)}</div><div class="tri"><div><b>${s.n}</b>${t("tr")}</div><div><b>${s.f}</b>${t("fk")}</div><div><b>${s.w}</b>${t("wf")}</div></div></div><div class="sech">👥 ${t("asf")}</div>`;
+S.soldiers.forEach(function(x){var c=u.sol[x.id];if(c){a=1;h+=`<div class="card row"><span class="nm">${esc(x.n)}</span><b class="org">×${c}</b></div>`}});if(!a)h+=`<div class="empty">${t("ne")}</div>`;
+h+=`<div class="sech">💀 ${t("aws")}</div>`;a=0;S.weapons.forEach(function(x){var l=u.wep[x.id];if(l){a=1;h+=`<div class="card row"><span class="nm">${esc(x.n)}</span><b class="org">${t("stf")} ${l}</b></div>`}});if(!a)h+=`<div class="empty">${t("nw2")}</div>`;h+="</div>"}
+if(ptab=="ba"){h=hd(t("kas"),t("kasu"),wal)+`<div class="list">${m}`;S.soldiers.forEach(function(x){h+=`<div class="card unit"><div class="th2">🪖</div><div class="gr"><div class="nm2">${esc(x.n)}${u.sol[x.id]?` <span class="org">×${u.sol[x.id]}</span>`:""}</div><div class="mu">${esc(x.ds||"")}</div><div class="chips"><span class="chip">🔥 ${x.a}</span><span class="chip">🛡 ${x.d}</span></div></div><div class="rt"><div class="pc">${f(x.p)}</div><button class="rb" onclick="buyS(${x.id})">${t("rek")}</button></div></div>`});h+="</div>"}
+if(ptab=="ar"){h=hd(t("ars"),t("arsu"),wal)+`<div class="list">${m}<div class="grid">`;S.weapons.forEach(function(w){var l=u.wep[w.id]||0;h+=`<div class="card wc"><div class="img">🔫<span class="tg">${l?t("stf")+" "+l:t("gs")}</span></div><div class="nm2">${esc(w.n)}</div><div class="mu">⚡ PWR ${w.r||0}</div><div class="pc">${f(l?w.u:w.p)}</div><button class="rb full" onclick="buyW(${w.id})">${l?t("up"):t("bes")}</button></div>`});h+="</div></div>"}
+if(ptab=="pr"){h=`<div class="top"><h1>${t("prof")}</h1></div><div class="list" style="text-align:center"><div class="av">👤</div><h1 class="pn">${esc(S.me)}</h1><div class="rank">🎖 ${esc(u.rank||t("rk0"))}</div><div class="st"><div class="card"><b>${f(u.money)}</b><span>${t("war")}</span></div><div class="card"><b>${s.n}</b><span>${t("tr")}</span></div></div><div class="card row"><span>🛡 ${t("fr")}: ${t("app").toUpperCase()}</span></div><div class="card row"><span class="lab">${t("spr")}</span>${lg()}</div><div class="card" style="text-align:left">${m}<label style="margin-top:0">${t("rd")}</label><input id="rc" inputmode="numeric" maxlength="8" placeholder="${t("en")}"><button class="btn" onclick="redeem()">${t("go")}</button></div><button class="btn lo" onclick="doLogout()">🚪 ${t("ab")}</button></div>`}
+return h+`<nav class="nav">${nv("hq","📊","HQ")}${nv("ba","👥","Barracks")}${nv("ar","💀","Armory")}${nv("pr","👤","Profile")}</nav>`}
+function gate(){var h='<div class="hero"><div class="logo">'+SH+'</div><p class="big">VØD</p><div class="sub">'+t("sub")+'</div></div>';
+if(!S.ready)h+='<div class="foot">'+(S.err?esc(S.err):t("ld"))+'</div>';
+else h+='<div class="pan"><h2>'+t("su")+'</h2><div class="mu">'+t("sup")+'</div><label>'+t("pw")+'</label><input id="p" type="password"><div class="msg '+(bad?"err":"good")+'">'+esc(msg)+'</div><button class="btn" onclick="setup()">'+t("sv")+'</button></div>';
+if(S.off)h+='<div class="foot err">'+t("off")+'</div>';
+$("app").innerHTML=h}
+async function setup(){var p=$("p").value;if(p.length<8)return say(t("shortp"),1);if(S.off)return say(t("off"),1);try{await DB.setupCommander(await hp("commander",p));draw()}catch(e){say(String(e.message||e),1)}}
+function draw(){var h="";if(!S.ready||!S.users.commander){return gate()}if(S.me&&(!S.users[S.me]||(S.me!="commander"&&(S.users[S.me].blocked||S.users[S.me].st!="ok"))))S.me=null;var m='<div class="msg '+(bad?"err":"good")+'">'+esc(msg)+'</div>';
+if(!S.me){h='<div class="hero"><div class="logo">'+SH+'</div><p class="big">VØD</p><div class="sub">'+t("sub")+'</div></div><div class="pan"><h2>'+(mode=="reg"?t("rec"):t("sec"))+'</h2><label>'+t("cs")+'</label><input id="n" placeholder="operative_id" autocapitalize="none" autocomplete="off"><label>'+t("pw")+'</label><input id="p" type="password" placeholder="••••••••">'+m+'<button class="btn" onclick="sub()">'+(mode=="reg"?t("req"):t("login"))+'</button><button class="lnk" onclick="go(\''+(mode=="reg"?"in":"reg")+'\')">'+(mode=="reg"?t("al"):t("na"))+'</button><div style="text-align:center">'+lg()+'</div></div><div class="foot">'+t("ft")+'</div>'}
+else if(S.me=="commander"){h='<div class="top"><div class="item">'+SH+'<div><h1>'+t("cmd")+'</h1><i>'+t("own").toUpperCase()+'</i></div></div><div class="item">'+lg()+'<button class="ic" onclick="doLogout()">🚪</button></div></div>'+tabs([["pl",t("pl")],["so",t("so")],["we",t("we")],["co",t("co")]],tab,"setTab")+'<div class="list">';
+var dock="";
+if(tab=="pl"){var ks=Object.keys(S.users).filter(function(k){return k!="commander"}).sort(function(a,b){return (S.users[a].st=="pending"?0:1)-(S.users[b].st=="pending"?0:1)});if(!ks.length)h+='<div class="mu">'+t("no")+'</div>';
+ks.forEach(function(k){var u=S.users[k],pd=u.st=="pending";h+='<div class="card"><div class="row"><div><div class="nm">'+esc(k)+'</div><div class="mu">'+f(u.money)+" "+t("cr")+'</div></div><span class="tag '+(pd?"p":u.blocked?"b":"")+'">'+(pd?t("pen"):u.blocked?t("blk"):t("app")).toUpperCase()+'</span></div>';
+h+=pd?'<div class="two"><button class="btn ok" onclick="dec(\''+esc(k)+'\',1)">✓ '+t("ap")+'</button><button class="btn no" onclick="dec(\''+esc(k)+'\',0)">✕ '+t("rj")+'</button></div>':'<div class="acts"><button onclick="money(\''+esc(k)+'\')">💵 '+t("mo")+'</button><button onclick="army(\''+esc(k)+'\')">👁 '+t("ar")+'</button><button onclick="askRank(\''+esc(k)+'\')">🎖 '+t("rk")+'</button><button onclick="blk(\''+esc(k)+'\')">🔒 '+(u.blocked?t("ul"):t("lk"))+'</button><button class="r" onclick="rem(\''+esc(k)+'\')">🗑 '+t("rm")+'</button></div>';h+='</div>'})}
+if(tab=="so"){S.soldiers.forEach(function(s){h+='<div class="card row"><div class="item"><div class="th">🪖</div><div><div class="nm" style="letter-spacing:1px">'+esc(s.n)+'</div><div class="mu">'+f(s.p)+" · "+t("atk")+" "+s.a+" · "+t("def")+" "+s.d+'</div></div></div><div class="item"><button class="ic" onclick="editS('+s.id+')">✎</button><button class="ic r" onclick="delS('+s.id+')">🗑</button></div></div>'});dock='<button class="btn" onclick="editS(0)">+ '+t("as").toUpperCase()+'</button>'}
+if(tab=="we"){S.weapons.forEach(function(w){h+='<div class="card row"><div class="item"><div class="th">🔫</div><div><div class="nm" style="letter-spacing:1px">'+esc(w.n)+'</div><div class="mu">'+f(w.p)+" · UPG "+f(w.u)+" · "+t("max").toUpperCase()+" "+w.m+'</div></div></div><div class="item"><button class="ic" onclick="editW('+w.id+')">✎</button><button class="ic r" onclick="delW('+w.id+')">🗑</button></div></div>'});dock='<button class="btn" onclick="editW(0)">+ '+t("aw").toUpperCase()+'</button>'}
+if(tab=="co"){h+='<div class="card"><label style="margin-top:0">'+t("amt")+'</label><input id="ga" type="number" inputmode="numeric"><label>'+t("mxu")+'</label><input id="gm" type="number" inputmode="numeric" min="1" value="1"><button class="btn" onclick="gen()">'+t("gen")+'</button><div class="mu" style="margin-top:10px">'+t("cn")+'</div></div>';if(!S.codes.length)h+='<div class="mu">'+t("no")+'</div>';
+S.codes.forEach(function(c){h+='<div class="card row"><div><code>'+c.c+'</code><div class="mu">'+f(c.a)+" · "+cinfo(c)+'</div></div>'+(c.by.length?"":'<button class="ic r" onclick="delc(\''+c.c+'\')">🗑</button>')+'</div>'})}
+h+='</div>'+(dock?'<div class="dock">'+dock+'</div>':"")}
+else{h=player()}if(0){var u=S.users[S.me];h='<div class="top"><div><h1>'+esc(S.me)+'</h1><i>'+f(u.money)+" "+t("cr").toUpperCase()+'</i></div><div class="item">'+lg()+'<button class="ic" onclick="doLogout()">🚪</button></div></div>'+tabs([["so",t("so")],["we",t("we")],["co",t("rd")]],ptab,"setP")+'<div class="list">'+m;
+if(ptab=="so")S.soldiers.forEach(function(s){h+='<div class="card row"><div class="item"><div class="th">🪖</div><div><div class="nm" style="letter-spacing:1px">'+esc(s.n)+' <span class="org">×'+(u.sol[s.id]||0)+'</span></div><div class="mu">'+f(s.p)+" · "+t("atk")+" "+s.a+" · "+t("def")+" "+s.d+'</div></div></div><button class="ic" onclick="buyS('+s.id+')">'+t("buy")+'</button></div>'});
+if(ptab=="we")S.weapons.forEach(function(w){var l=u.wep[w.id]||0;h+='<div class="card row"><div class="item"><div class="th">🔫</div><div><div class="nm" style="letter-spacing:1px">'+esc(w.n)+(l?' <span class="org">'+t("stf")+" "+l+'</span>':"")+'</div><div class="mu">'+f(l?w.u:w.p)+" · "+t("max").toUpperCase()+" "+w.m+'</div></div></div><button class="ic" onclick="buyW('+w.id+')">'+(l?t("up"):t("buy"))+'</button></div>'});
+if(ptab=="co")h+='<div class="card"><label style="margin-top:0">'+t("en")+'</label><input id="rc" inputmode="numeric" maxlength="8"><button class="btn" onclick="redeem()">'+t("go")+'</button></div>';h+='</div>'}
+if(sh)h+='<div class="sheet" onclick="if(event.target==this)closeSheet()"><div><div class="row" style="margin-bottom:12px"><h2 style="margin:0;font-size:18px">'+sh.h+'</h2><button class="ic" onclick="closeSheet()">✕</button></div>'+sh.b+'</div></div>';
+$("app").innerHTML=h}
+document.addEventListener("keydown",function(e){if(e.key=="Enter"&&!S.me)sub();if(e.key=="Escape"&&sh)closeSheet()});
+draw();
+</script>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {getFirestore,collection,doc,onSnapshot,setDoc,deleteDoc,runTransaction,writeBatch} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+const app=initializeApp({apiKey:"AIzaSyBen1ur-F40Y3zGp_HzhgFH6IWsyngXGCQ",authDomain:"vod2-6f690.firebaseapp.com",projectId:"vod2-6f690",storageBucket:"vod2-6f690.firebasestorage.app",messagingSenderId:"341332081702",appId:"1:341332081702:web:29f79ab1ff2647126c7ae7"});
+const db=getFirestore(app),C=["users","soldiers","weapons","codes"],shadow={users:{},soldiers:{},weapons:{},codes:{}},loaded={};
+const idk=c=>c=="codes"?"c":"id";
+function cur(c){const m={};if(c=="users"){for(const k in S.users)m[k]=S.users[k]}else S[c].forEach(x=>{m[String(x[idk(c)])]=x});return m}
+const fail=e=>{S.err="Fehler: "+(e&&e.message||e);refresh()};
+function refresh(){const a=document.activeElement;if(a&&a.tagName=="INPUT"&&a.value)return;draw()}
+function push(){C.forEach(c=>{const m=cur(c),sh=shadow[c];
+for(const k in m){const j=JSON.stringify(m[k]);if(sh[k]!==j){sh[k]=j;setDoc(doc(db,c,k),m[k]).catch(fail)}}
+for(const k in sh){if(!(k in m)){delete sh[k];deleteDoc(doc(db,c,k)).catch(fail)}}})}
+C.forEach(c=>onSnapshot(collection(db,c),{includeMetadataChanges:true},snap=>{S.off=snap.metadata.fromCache&&!snap.metadata.hasPendingWrites;const m={};snap.forEach(d=>{m[d.id]=d.data()});shadow[c]={};for(const k in m)shadow[c][k]=JSON.stringify(m[k]);
+if(c=="users")S.users=m;else if(c=="codes")S.codes=Object.values(m).sort((a,b)=>(b.t||0)-(a.t||0));else S[c]=Object.values(m).sort((a,b)=>a.id-b.id);
+loaded[c]=1;if(C.every(k=>loaded[k]))S.ready=true;refresh()},fail));
+window.DB={push,
+async redeem(v,me){try{return await runTransaction(db,async tx=>{const cr=doc(db,"codes",v),ur=doc(db,"users",me),cs=await tx.get(cr),us=await tx.get(ur);
+if(!cs.exists())return{r:"bad"};const c=cs.data(),u=us.data();if(u.blocked)return{r:"blocked"};if(c.by.length>=c.m)return{r:"bad"};if(c.by.includes(me))return{r:"again"};
+c.by.push(me);u.money+=c.a;tx.set(cr,c);tx.set(ur,u);return{r:"ok",a:c.a}})}catch(e){return{r:"err"}}},
+async setupCommander(ph){const b=writeBatch(db);b.set(doc(db,"users","commander"),{ph:ph,st:"ok",blocked:false,money:0,sol:{},wep:{}});
+SEED.soldiers.forEach(x=>b.set(doc(db,"soldiers",String(x.id)),x));SEED.weapons.forEach(x=>b.set(doc(db,"weapons",String(x.id)),x));await b.commit()}};
+</script>
+</body></html>
